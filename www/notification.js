@@ -84,6 +84,11 @@ module.exports = {
         var _title = (typeof title === "string" ? title : "Prompt");
         var _buttonLabels = (buttonLabels || ["OK","Cancel"]);
 
+        //var _keyboardType = (_message.keyboardType) ? _message.keyboardType: '';
+        //_message = _message.message;
+
+        var _keyboardType = (window.keyboardType) ? window.keyboardType : '';
+
         // Strings are deprecated!
         if (typeof _buttonLabels === 'string') {
             console.log("Notification.prompt(string, function, string, string) is deprecated.  Use Notification.confirm(string, function, string, array).");
@@ -91,8 +96,10 @@ module.exports = {
 
         _buttonLabels = convertButtonLabels(_buttonLabels);
 
+        console.log("KEY BOARD TYPE : " + _keyboardType);
+
         var _defaultText = (defaultText || "");
-        exec(resultCallback, null, "Notification", "prompt", [_message, _title, _buttonLabels, _defaultText]);
+        exec(resultCallback, null, "Notification", "prompt", [_message, _title, _buttonLabels, _defaultText, _keyboardType]);
     },
 
     /**
